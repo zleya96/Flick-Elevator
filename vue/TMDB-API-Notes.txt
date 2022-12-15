@@ -1,0 +1,68 @@
+varchar (1000)c6ae091c1c0f88bfdab72c969175f430 api key v3
+
+example request with v3 key: https://api.themoviedb.org/3/movie/550?api_key=c6ae091c1c0f88bfdab72c969175f430
+
+***API key v4*** - this can be used as a bearer token, and cut everything starting with "?" in the above request
+eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNmFlMDkxYzFjMGY4OGJmZGFiNzJjOTY5MTc1ZjQzMCIsInN1YiI6IjYzOGEyNzFhM2Y4ZWRlMDA4NmU5ZDg5YyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.or024JB5VTtHlI6gMCEvLKgOwnyAahbo9opxbJZJ7oM
+
+The process for getting an image URL:
+https://developers.themoviedb.org/3/getting-started/images
+**When the admin is searching for movies to add, there will need to be a seperate API request to get the image. Maybe this is best done near the end of the adding process?
+
+varchar (1000)
+base url: https://api.themoviedb.org/3/
+
+***GETTERS***
+
+Get movie by id
+https://api.themoviedb.org/3/movie/{movie_id}
+
+Get movies by query string
+https://api.themoviedb.org/3/search/movie?query=Star%20Wars&page=1&include_adult=false
+1 <= page <= 1000, default: 1 (1 returns most relevant results)
+include_adult=false filters out pornography
+THIS CAN INCLUDE OTHER PARAMETERS, eg:
+https://api.themoviedb.org/3/search/movie?query=love&with-genres=28&page=1&include_adult=false
+reference discover doc for this
+
+Get a list of genres (perhaps for a dropdown menu for the admin, unless the ids we hardcode them into a vuex as an object)
+https://api.themoviedb.org/3/genre/movie/list
+
+Get movies by genre_id
+https://api.themoviedb.org/3/discover/movie?with_genres=878&page=1
+
+List of parameters for "discover" path: https://developers.themoviedb.org/3/discover/movie-discover
+
+Get list of cast/crew information
+https://api.themoviedb.org/3/search/person?query=Steven&page=1&include_adult=false
+
+
+*****Sample JSON Query results*****
+
+{
+    "page": 1,
+    "results": [
+        {
+            "adult": false,
+            "backdrop_path": "/yrdAamkeqXHm0UYukk8xgoCvc7G.jpg",
+            "genre_ids": [
+                12,
+                28,
+                878
+            ],
+            "id": 11,
+            "original_language": "en",
+            "original_title": "Star Wars",
+            "overview": "Princess Leia is captured and held hostage by the evil Imperial forces in their effort to take over the galactic Empire. Venturesome Luke Skywalker and dashing captain Han Solo team together with the loveable robot duo R2-D2 and C-3PO to rescue the beautiful princess and restore peace and justice in the Empire.",
+            "popularity": 71.026,
+            "poster_path": "/6FfCtAuVAW8XJjZ7eWeLibRLWTw.jpg",
+            "release_date": "1977-05-25",
+            "title": "Star Wars",
+            "video": false,
+            "vote_average": 8.2,
+            "vote_count": 17951
+        }
+    ],
+    "total_pages": 1,
+    "total_results": 1
+}
